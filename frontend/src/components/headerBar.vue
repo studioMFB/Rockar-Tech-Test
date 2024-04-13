@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteNameProvider, RoutePathProvider } from '@/provider';
+import { RouteNameProvider, RoutePathProvider } from '@/assets/provider';
 </script>
 
 <template>
@@ -31,4 +31,4 @@ import { RouteNameProvider, RoutePathProvider } from '@/provider';
     }
   }
 }
-</style>
+</style>@/assets/provider

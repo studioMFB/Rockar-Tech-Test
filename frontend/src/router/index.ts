@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import { RouteNameProvider, RoutePathProvider } from '@/provider';
+import { RouteNameProvider, RoutePathProvider } from '@/assets/provider';
 import HomeView from '@/views/HomeView.vue';
 
 
@@ -12,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: RoutePathProvider.products,
     name: RouteNameProvider.products,
-    component: () => import('../views/AboutView.vue')
+    component: () => import('@/views/productsView.vue')
   },
   {
     path: RoutePathProvider.customers,
