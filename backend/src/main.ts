@@ -4,10 +4,18 @@ import express from "express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from 'apollo-server-express';
 import Schema from './gql/schema';
+import cors from 'cors';
 
 
 async function startApolloServer() {
     const app = express();
+
+    const clientPort = process.env.CLIENT_PORT || 3000;
+
+    // Configure CORS.
+    app.use(cors({
+        origin: `http://localhost:${clientPort}`, // Allow only the front-end origin to access.
+    }));
 
     const httpServer = http.createServer(app);
 
@@ -20,13 +28,13 @@ async function startApolloServer() {
     // Start the GraphQL server.
     await server.start();
 
-    server.applyMiddleware({ app, path: '/graphql' });
+    server.applyMiddleware({ app, path: '/rockar' });
 
-    const port = process.env.SERVER_PORT || 4000;
+    const serverPort = process.env.SERVER_PORT || 4000;
 
     await new Promise(() =>
-        httpServer.listen({ port: port }, () =>{
-            console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
+        httpServer.listen({ port: serverPort }, () => {
+            console.log(`🚀 Server ready at http://localhost:${serverPort}${server.graphqlPath}`);
         })
     );
 }

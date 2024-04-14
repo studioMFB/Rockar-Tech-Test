@@ -1,28 +1,42 @@
 import { gql } from 'apollo-server-express';
+import { GraphQLSchema } from 'graphql/type/schema';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { EmailAddressResolver, PostalCodeResolver, typeDefs as scalarTypeDefs } from 'graphql-scalars';
+import { CustomerTypes } from './types/customer';
+import { ProductTypes } from './types/product';
+import { Customer, ICustomer, } from '../objects/customer';
+import { IProduct, Product } from '../objects/product';
 
 
 export default class Schema {
+    
+    static init(): GraphQLSchema{
+        const customer = new Customer();
+        const product = new Product();
 
-    static init() {
         const typeDefs = gql`
-        type Query {
-            hello: String
-          }
+             type Query
+             ${CustomerTypes}
+             ${ProductTypes}
         `;
-
+        
         const resolvers = {
             Query: {
-                hello: () => 'Hello world!',
+                customers: customer.retrieve<ICustomer>(),
+                products: product.retrieve<IProduct>(),
+        
             },
             // Add the custom scalar resolvers here
+            EmailAddress: EmailAddressResolver,
+            PostalCode: PostalCodeResolver
         };
 
         const schema = makeExecutableSchema({
-            typeDefs: [typeDefs], // Combine scalar type definitions with our own
+            typeDefs: [scalarTypeDefs, typeDefs], // Combine scalar type definitions with our own
             resolvers: resolvers,
         });
 
         return schema;
     }
+
 }
