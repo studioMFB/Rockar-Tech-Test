@@ -117,7 +117,8 @@ retrieve<T extends object>(identifer?: string) {
 
         result[newKey] = item[key];
       }
-
+      console.log("mapData => data ", data);
+      console.log("mapData => result ", result);
       return result;
     });
   }
@@ -151,6 +152,8 @@ retrieve<T extends object>(identifer?: string) {
  */
   private async filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
     try {
+      console.log("filter ", filter);
+      console.log("dataArray ", dataArray);
       // Filter the data
       const filteredData = dataArray.filter((data: T) => {
         let matches = true;
@@ -159,11 +162,16 @@ retrieve<T extends object>(identifer?: string) {
           // Check if key exists and if its value is not a match.
           const dataValue = (data[key as keyof typeof data] as string).toLowerCase();
 
+          console.log("dataValue ", dataValue);
+          console.log("value.toLowerCase() ", value.toLowerCase());
+
+
           if (key in data && dataValue !== value.toLowerCase()) {
               matches = false;
             break;
           }
         }
+        console.log("matches ", matches);
         return matches;
       });
 

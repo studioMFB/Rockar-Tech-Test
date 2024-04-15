@@ -30,7 +30,7 @@ function search() {
 
     load(undefined, { filter: filters });
 
-    // console.log("result.value.products ",result.value.products)
+    console.log("result.value ",result.value)
 }
 </script>
 
