@@ -30,7 +30,7 @@ function search() {
 
     load(undefined, { filter: filters });
 
-    console.log("result.value.products ",result.value.products)
+    // console.log("result.value.products ",result.value.products)
 }
 </script>
 
@@ -95,10 +95,16 @@ function search() {
 }
 
 .product__search--btn {
+    cursor: pointer;
     margin: 0 1rem;
     border-radius: 5px;
     border: none;
     color: var(--link-color);
     background: var(--title-color);
+
+    &:hover{
+        opacity: .8;
+        border: 1px solid rgba(255, 255, 255, .2);
+    }
 }
 </style>
