@@ -9,38 +9,41 @@ const { result, loading, error } = useQuery(PRODUCTS_QUERY);
 </script>
 
 <template>
-  <p v-if="loading"> Loading... </p>
-  <p v-if="error"> {{ ERROR_MSG_WRONG }} </p>
+  <div>
+    <p v-if="loading"> Loading... </p>
+    <p v-if="error"> {{ ERROR_MSG_WRONG }} </p>
 
-  <h1>Products</h1>
+    <h1>Products</h1>
 
-  <ul v-if="result" class="container">
-    <ProductSearch />
-  </ul>
+    <ul v-if="result" class="container">
+      <ProductSearch />
+    </ul>
+  </div>
 </template>
 
 <style scoped lang="scss">
 .item {
-    color: var(--item-color);
+  color: var(--item-color);
 }
-.product {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: -moz-fit-content;
-    width: fit-content;
-    height: auto;
-    margin: .5rem auto;
-    border-radius: 5px;
-    border: solid 1px rgba(65, 65, 65, 0.418);
 
-    &>li {
-        margin: .2rem;
-        white-space: nowrap;
-        font-weight: 400;
-        font-size: 15px;
-    }
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: auto;
+  margin: .5rem auto;
+  border-radius: 5px;
+  border: solid 1px rgba(65, 65, 65, 0.418);
+
+  &>li {
+    margin: .2rem;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 15px;
+  }
 }
 
 .container {

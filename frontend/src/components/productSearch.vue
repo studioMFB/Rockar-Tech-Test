@@ -29,8 +29,6 @@ function search() {
     if (colour.value) filters.colour = colour.value;
 
     load(undefined, { filter: filters });
-
-    console.log("result.value ", result.value)
 }
 </script>
 
