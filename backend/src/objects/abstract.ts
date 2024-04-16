@@ -51,7 +51,7 @@ export default abstract class AbstractObject {
 * @throws {Error} If there is a problem fetching the data, an error is thrown with a message 
 *                 indicating the failure.
 */
-retrieve<T extends object>(identifer?: string) {
+  retrieve<T extends object>(identifer?: string) {
     return async (obj: any, args: { filter: T }, context: any, info: any): Promise<T[]> => {
 
       const params = {
@@ -85,28 +85,28 @@ retrieve<T extends object>(identifer?: string) {
     this.adaptor.write(this.type, {}, identifer);
   }
 
-   /**
- * Transforms the keys of objects within an array from snake_case to camelCase.
- *
- * Specifically, it targets the 'contact_number' field, converting it to 'contactNumber',
- * while keeping all other fields unchanged. This function doesn't mutate the original 
- * data but returns a new array with the transformed objects.
- *
- * @param {any[]} data - An array of objects where each object's keys represent the data fields.
- *                       These objects may contain a mix of snake_case and other naming 
- *                       conventions for keys.
- *
- * @returns {any[]} A new array derived from the input `data`, where each object's 'contact_number'
- *                  field (if present) has been renamed to 'contactNumber', and the value 
- *                  from the original object is copied over. All other fields are kept as-is.
- *
- * @example
- * const originalData = [{ contact_number: '12345', other_field: 'value' },...];
- * 
- * const mappedData = mapData(originalData);
- * // Result: [{ contactNumber: '12345', other_field: 'value' },...]
- *
- */
+  /**
+* Transforms the keys of objects within an array from snake_case to camelCase.
+*
+* Specifically, it targets the 'contact_number' field, converting it to 'contactNumber',
+* while keeping all other fields unchanged. This function doesn't mutate the original 
+* data but returns a new array with the transformed objects.
+*
+* @param {any[]} data - An array of objects where each object's keys represent the data fields.
+*                       These objects may contain a mix of snake_case and other naming 
+*                       conventions for keys.
+*
+* @returns {any[]} A new array derived from the input `data`, where each object's 'contact_number'
+*                  field (if present) has been renamed to 'contactNumber', and the value 
+*                  from the original object is copied over. All other fields are kept as-is.
+*
+* @example
+* const originalData = [{ contact_number: '12345', other_field: 'value' },...];
+* 
+* const mappedData = mapData(originalData);
+* // Result: [{ contactNumber: '12345', other_field: 'value' },...]
+*
+*/
   private mapData(data: any[]): any[] {
     return data.map(item => {
       const result: { [key: string]: any } = {};
@@ -114,11 +114,9 @@ retrieve<T extends object>(identifer?: string) {
       for (const key in item) {
         // Only transform the data that we know to be snake_case to camelCase.
         const newKey = key === 'contact_number' ? 'contactNumber' : key;
-
         result[newKey] = item[key];
       }
-      console.log("mapData => data ", data);
-      console.log("mapData => result ", result);
+
       return result;
     });
   }
@@ -152,26 +150,20 @@ retrieve<T extends object>(identifer?: string) {
  */
   private async filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
     try {
-      console.log("filter ", filter);
-      console.log("dataArray ", dataArray);
       // Filter the data
       const filteredData = dataArray.filter((data: T) => {
-        let matches = true;
+        let matches = false;
 
         for (const [key, value] of Object.entries(filter)) {
-          // Check if key exists and if its value is not a match.
+          // Check if key exists and if its value is a match.
           const dataValue = (data[key as keyof typeof data] as string).toLowerCase();
 
-          console.log("dataValue ", dataValue);
-          console.log("value.toLowerCase() ", value.toLowerCase());
-
-
-          if (key in data && dataValue !== value.toLowerCase()) {
-              matches = false;
+          if (key in data && dataValue === value.toLowerCase()) {
+            matches = true;
             break;
           }
         }
-        console.log("matches ", matches);
+
         return matches;
       });
 

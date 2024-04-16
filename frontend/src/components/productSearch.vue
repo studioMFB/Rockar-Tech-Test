@@ -30,7 +30,7 @@ function search() {
 
     load(undefined, { filter: filters });
 
-    console.log("result.value ",result.value)
+    console.log("result.value ", result.value)
 }
 </script>
 
@@ -45,19 +45,12 @@ function search() {
         <div v-if="loading">Loading...</div>
         <div v-if="error">Error: {{ error.message }}</div>
 
-        <ul v-if="result">
-            <li v-for="(product) in result.products" :key="product.id" class="item product">
+        <ul v-if="result" class="container">
+            <li v-for="product in result.products" :key="product.id" class="item product">
                 {{ product.make }} - {{ product.model }} - {{ product.colour }}
                 {{ product.vin }} - {{ product.price }}
             </li>
         </ul>
-
-        <ul v-if="result" class="container">
-      <li v-for="product in result.products" :key="product.id" class="item product">
-        {{ product.make }} - {{ product.model }} - {{ product.colour }}
-        {{ product.vin }} - {{ product.price }}
-      </li>
-  </ul>
     </div>
 </template>
 
@@ -65,6 +58,7 @@ function search() {
 .item {
     color: var(--item-color);
 }
+
 .product {
     display: flex;
     flex-direction: column;
@@ -102,7 +96,7 @@ function search() {
     color: var(--link-color);
     background: var(--title-color);
 
-    &:hover{
+    &:hover {
         opacity: .8;
         border: 1px solid rgba(255, 255, 255, .2);
     }

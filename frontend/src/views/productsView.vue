@@ -3,10 +3,9 @@ import { ERROR_MSG_WRONG } from "@/assets/constants/error";
 import { useQuery } from '@vue/apollo-composable';
 import { PRODUCTS_QUERY } from "@/queries/product";
 import ProductSearch from "@/components/productSearch.vue";
-// import { reactive } from "vue";
+
 
 const { result, loading, error } = useQuery(PRODUCTS_QUERY);
-// console.log("result.value ",result.value)
 </script>
 
 <template>
@@ -17,10 +16,6 @@ const { result, loading, error } = useQuery(PRODUCTS_QUERY);
 
   <ul v-if="result" class="container">
     <ProductSearch />
-      <!-- <li v-for="product in result.products" :key="product.id" class="item product">
-        {{ product.make }} - {{ product.model }} - {{ product.colour }}
-        {{ product.vin }} - {{ product.price }}
-      </li> -->
   </ul>
 </template>
 

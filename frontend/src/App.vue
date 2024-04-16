@@ -3,7 +3,7 @@ import headerBar from "@/components/headerBar.vue";
 </script>
 
 <template>
-  <h1>Rockar</h1>
+  <!-- <h1>Rockar</h1> -->
   <header-bar />
   <router-view />
 </template>
