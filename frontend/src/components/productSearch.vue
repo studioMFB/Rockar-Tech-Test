@@ -3,13 +3,8 @@
 import { useLazyQuery } from "@vue/apollo-composable";
 import { PRODUCTS_QUERY } from "@/queries/product";
 import { ref } from "vue";
+import { IProductFilters } from "@/definitions/product";
 
-
-interface IProductFilters {
-    make: string,
-    model: string,
-    colour: string
-}
 
 const { load, result, loading, error } = useLazyQuery(PRODUCTS_QUERY);
 

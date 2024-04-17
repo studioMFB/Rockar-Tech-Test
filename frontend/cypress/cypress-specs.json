@@ -1,0 +1,4 @@
+[
+    "./cypress/e2e/specs/products.cy.ts",
+    "./cypress/e2e/specs/customers.cy.ts"
+]

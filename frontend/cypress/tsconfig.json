@@ -1,0 +1,33 @@
+{
+  "references": [
+  ],
+  "compilerOptions": {
+    "types": [
+      "node",
+      "cypress",
+      "mocha",
+      "jest"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": [
+        "./*"
+      ]
+    },
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "declaration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": false,
+    "noImplicitAny": false,
+    "strict": false,
+    "noEmit": true,
+    "inlineSourceMap": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true
+  }
+}

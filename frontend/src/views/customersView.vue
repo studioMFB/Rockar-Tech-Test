@@ -13,7 +13,7 @@ const { result, loading, error } = useQuery(CUSTOMERS_NAME_QUERY);
     <p v-if="loading"> Loading... </p>
     <p v-if="error"> {{ ERROR_MSG_WRONG }} </p>
 
-    <h1>Customers</h1>
+    <h1 class="title">Customers</h1>
 
     <ul v-if="result" class="container">
       <li v-for="customer in result.customers" :key="customer.id" class="item customer">

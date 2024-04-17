@@ -5,3 +5,9 @@ export interface IProduct {
     model: string,
     price: number
 }
+
+export interface IProductFilters {
+    make: string,
+    model: string,
+    colour: string
+}

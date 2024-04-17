@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: RouteNameProvider.customer,
     path: `${RoutePathProvider.customer}/:forename/:surname`,
-    component: () => import('../components/customerTile.vue'),
+    component: () => import('../views/customerView.vue'),
     props: true
   }
 ]

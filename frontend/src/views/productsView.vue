@@ -13,7 +13,7 @@ const { result, loading, error } = useQuery(PRODUCTS_QUERY);
     <p v-if="loading"> Loading... </p>
     <p v-if="error"> {{ ERROR_MSG_WRONG }} </p>
 
-    <h1>Products</h1>
+    <h1 class="title">Products</h1>
 
     <ul v-if="result" class="container">
       <ProductSearch />
