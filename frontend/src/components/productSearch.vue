@@ -1,10 +1,30 @@
 <script setup lang="ts">
 // import { ERROR_MSG_WRONG } from "@/assets/constants/error";
-import { useLazyQuery } from "@vue/apollo-composable";
-import { PRODUCTS_QUERY } from "@/queries/product";
-import { ref } from "vue";
-import { IProductFilters } from "@/definitions/product";
+import { useLazyQuery, useQuery } from "@vue/apollo-composable";
+import { PRODUCTS_QUERY, PRODUCTS_MAKES_QUERY, PRODUCTS_MODELS_QUERY, PRODUCTS_COLOURS_QUERY } from "@/queries/product";
+import { computed, ref } from "vue";
+import { type IProductFilters, type IProduct } from "@/definitions/product";
+import { DocumentNode } from "graphql";
 
+
+function filterProductCategory(QUERY: DocumentNode, category: string): string[] {
+    let uniqueColours: string[] = [];
+    const { result, loading, error } = useQuery(QUERY);
+    if (result)
+        uniqueColours = Array.from(new Set(result.value.products.map((p: IProduct) => p[category])));
+
+    return uniqueColours;
+}
+
+const uniqueMakes = computed(() => {
+    return filterProductCategory(PRODUCTS_MAKES_QUERY, 'make');
+});
+const uniqueModels = computed(() => {
+    return filterProductCategory(PRODUCTS_MODELS_QUERY, 'model');
+});
+const uniqueColours = computed(() => {
+    return filterProductCategory(PRODUCTS_COLOURS_QUERY, 'colour');
+});
 
 const { load, result, loading, error } = useLazyQuery(PRODUCTS_QUERY);
 
@@ -29,9 +49,18 @@ function search() {
 
 <template>
     <div>
-        <input class="product__search--imput" v-model="make" type="text" placeholder="Make" />
-        <input class="product__search--imput" v-model="model" type="text" placeholder="Model" />
-        <input class="product__search--imput" v-model="colour" type="text" placeholder="Colour" />
+        <select class="product__search--imput" v-model="make">
+            <option disabled value="">Select a make</option>
+            <option v-for="make in uniqueMakes" :key="make">{{ make }}</option>
+        </select>
+        <select class="product__search--imput" v-model="model">
+            <option disabled value="">Select a model</option>
+            <option v-for="model in uniqueModels" :key="model">{{ model }}</option>
+        </select>
+        <select class="product__search--imput" v-model="colour">
+            <option disabled value="">Select a colour</option>
+            <option v-for="colour in uniqueColours" :key="colour">{{ colour }}</option>
+        </select>
 
         <button class="product__search--btn" @click="search"> Search </button>
 

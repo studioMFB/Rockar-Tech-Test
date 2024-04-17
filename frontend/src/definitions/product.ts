@@ -3,7 +3,8 @@ export interface IProduct {
     colour: string,
     make: string,
     model: string,
-    price: number
+    price: number,
+    [key: string]: string | number | undefined; // Index signature
 }
 
 export interface IProductFilters {
