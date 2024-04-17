@@ -3,6 +3,7 @@ import { defineProps } from "vue";
 import { ERROR_MSG_WRONG } from "@/assets/constants/error";
 import { useQuery } from '@vue/apollo-composable';
 import { CUSTOMERS_QUERY } from "@/queries/customer";
+import customerDetails from "@/components/customerDetails.vue";
 
 
 const props = defineProps<{
@@ -26,11 +27,7 @@ const { result, loading, error } = useQuery(CUSTOMERS_QUERY, {
     <h1 class="title">Customer</h1>
 
     <ul v-if="result" class="container">
-      <li v-for="customer in result.customers" :key="customer.id" class="item customer">
-        {{ customer.forename }} - {{ customer.surname }}
-        {{ customer.email }} - {{ customer.contactNumber }}
-        {{ customer.postcode }}
-      </li>
+      <customer-details v-for="customer in result.customers" :key="customer.id" :customer="customer"></customer-details>
     </ul>
   </div>
 </template>

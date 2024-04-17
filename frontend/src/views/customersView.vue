@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ERROR_MSG_WRONG } from "@/assets/constants/error";
-import { RouteNameProvider } from '@/assets/provider';
 import { useQuery } from '@vue/apollo-composable';
 import { CUSTOMERS_NAME_QUERY } from "@/queries/customer";
+import customerTile from "@/components/customerTile.vue";
 
 
 const { result, loading, error } = useQuery(CUSTOMERS_NAME_QUERY);
@@ -16,11 +16,7 @@ const { result, loading, error } = useQuery(CUSTOMERS_NAME_QUERY);
     <h1 class="title">Customers</h1>
 
     <ul v-if="result" class="container">
-      <li v-for="customer in result.customers" :key="customer.id" class="item customer">
-        <router-link className="customer" :to="{name: RouteNameProvider.customer, params: {forename: customer.forename, surname: customer.surname}}" >
-          {{ customer.forename }} - {{ customer.surname }}
-        </router-link>
-      </li>
+      <customer-tile v-for="customer in result.customers" :key="customer.id" :forename="customer.forename" :surname="customer.surname"></customer-tile>
     </ul>
   </div>
 </template>

@@ -26,7 +26,7 @@ describe('/customers', () => {
             cy.url().should('include', `${RoutePathProvider.customer}/${customer.forename}/${customer.surname}`);
             cy.assertTitle('Customer');
 
-            cy.get('.item.customer').should('exist').and('contain', `${customer.forename} - ${customer.surname} ${customer.email} - ${customer.contact_number} ${customer.postcode}`);
+            cy.get('.item.customer').should('exist').and('contain', `${customer.forename} - ${customer.surname} ${customer.email} - ${customer.contactNumber} ${customer.postcode}`);
         });
     })
 
