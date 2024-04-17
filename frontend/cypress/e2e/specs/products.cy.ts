@@ -2,7 +2,7 @@ import { product } from '../../fixtures/product';
 import { RoutePathProvider } from './../../../src/assets/provider';
 
 
-describe('/projects', () => {
+describe('/products', () => {
 
     beforeEach(() => {
         cy.visit(RoutePathProvider.products);
@@ -17,16 +17,24 @@ describe('/projects', () => {
         cy.get('.product__search--btn').should('exist');
     })
 
+    it('should be able to select a make from the dropdown', () => {
+        cy.get('#makeSelect').select(product.make).should('have.value', product.make);
+    });
+
+    it('should be able to select a model from the dropdown', () => {
+        cy.get('#modelSelect').select(product.model).should('have.value', product.model);
+    });
+
+    it('should be able to select a colour from the dropdown', () => {
+        cy.get('#colourSelect').select(product.colour).should('have.value', product.colour);
+    });
+
     it('should make a search request when the search button is clicked', () => {
-        cy.get('[type="text"][placeholder="Make"]').should('exist').as('makeInput').clear().type(product.make);
-        cy.get('[type="text"][placeholder="Model"]').should('exist').as('modelInput').clear().type(product.model);
-        cy.get('[type="text"][placeholder="Colour"]').should('exist').as('colourInput').clear().type(product.colour);
+        cy.get('#makeSelect').select(product.make).should('have.value', product.make);
+        cy.get('#modelSelect').select(product.model).should('have.value', product.model);
+        cy.get('#colourSelect').select(product.colour).should('have.value', product.colour);
 
         cy.get('.product__search--btn').click().then(() => {
-            cy.get('@makeInput').should('have.value', product.make);
-            cy.get('@modelInput').should('have.value', product.model);
-            cy.get('@colourInput').should('have.value', product.colour);
-
             cy.get('.item.product').should('exist').and('contain', `${product.make} - ${product.model} - ${product.colour} ${product.vin} - ${product.price}`);
         });
     })

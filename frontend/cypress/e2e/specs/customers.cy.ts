@@ -26,7 +26,10 @@ describe('/customers', () => {
             cy.url().should('include', `${RoutePathProvider.customer}/${customer.forename}/${customer.surname}`);
             cy.assertTitle('Customer');
 
-            cy.get('.item.customer').should('exist').and('contain', `${customer.forename} - ${customer.surname} ${customer.email} - ${customer.contactNumber} ${customer.postcode}`);
+            cy.get('.item.customer--detail').find('p').eq(0).should('exist').and('contain', `${customer.forename} - ${customer.surname}`);
+            cy.get('.item.customer--detail').find('p').eq(1).should('exist').and('contain', `${customer.email}`);
+            cy.get('.item.customer--detail').find('p').eq(2).should('exist').and('contain', `${customer.contactNumber}`);
+            cy.get('.item.customer--detail').find('p').eq(3).should('exist').and('contain', `${customer.postcode}`);
         });
     })
 

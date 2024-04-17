@@ -21,7 +21,7 @@ const surname = computed(() => props.surname);
     </li>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .customer {
     display: flex;
     flex-direction: row;
@@ -31,16 +31,8 @@ const surname = computed(() => props.surname);
     height: auto;
     margin: .1rem auto;
 
-    &>p {
-        margin: .2rem;
-        white-space: nowrap;
-        font-weight: 400;
-        font-size: 15px;
-    }
-
     a {
         cursor: pointer;
-        color: var(--item-color);
         text-decoration: none;
 
         &:hover {

@@ -49,15 +49,15 @@ function search() {
 
 <template>
     <div>
-        <select class="product__search--imput" v-model="make">
+        <select id="makeSelect" class="product__search--imput" v-model="make">
             <option disabled value="">Select a make</option>
             <option v-for="make in uniqueMakes" :key="make">{{ make }}</option>
         </select>
-        <select class="product__search--imput" v-model="model">
+        <select id="modelSelect" class="product__search--imput" v-model="model">
             <option disabled value="">Select a model</option>
             <option v-for="model in uniqueModels" :key="model">{{ model }}</option>
         </select>
-        <select class="product__search--imput" v-model="colour">
+        <select id="colourSelect" class="product__search--imput" v-model="colour">
             <option disabled value="">Select a colour</option>
             <option v-for="colour in uniqueColours" :key="colour">{{ colour }}</option>
         </select>
