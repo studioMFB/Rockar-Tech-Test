@@ -15,14 +15,14 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
+### Run your end-to-end tests in headless browser
 ```
-npm run test:unit
+npm run test-run:cy
 ```
 
-### Run your end-to-end tests
+### Run your end-to-end tests in headed browser 
 ```
-npm run test:e2e
+npm run test-open:cy
 ```
 
 ### Lints and fixes files

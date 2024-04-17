@@ -1,13 +1,13 @@
 import 'dotenv/config';
 import http from "http";
 import express from "express";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
-import { ApolloServer } from 'apollo-server-express';
-import Schema from './gql/schema';
 import cors from 'cors';
+import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import { ApolloServer, type ExpressContext } from 'apollo-server-express';
+import Schema from './gql/schema';
 
 
-async function startApolloServer() {
+export async function startApolloServer(): Promise<ApolloServer<ExpressContext>> {
     const app = express();
 
     const clientPort = process.env.CLIENT_PORT || 3000;
@@ -37,6 +37,8 @@ async function startApolloServer() {
             console.log(`🚀 Server ready at http://localhost:${serverPort}${server.graphqlPath}`);
         })
     );
+
+    return server;
 }
 
 startApolloServer();
