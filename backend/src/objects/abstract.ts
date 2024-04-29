@@ -56,25 +56,27 @@ export default abstract class AbstractObject {
     this.adaptor.write(this.type, {}, identifer);
   }
 
-/**
- * Converts keys of objects within an array from snake_case to camelCase, specifically targeting the 'contact_number' field.
- *
- * @param data An array of objects where each object's keys represent data fields.
- * @returns A new array derived from the input data, where each object's 'contact_number' field (if present) has been renamed to 'contactNumber'.
- */
-  private mapData(data: any[]): any[] {
-    return data.map(item => {
-      const result: { [key: string]: any } = {};
 
-      for (const key in item) {
-        // Only transform the data that we know to be snake_case to camelCase.
-        const newKey = key === 'contact_number' ? 'contactNumber' : key;
-        result[newKey] = item[key];
-      }
+  //// DEPRECATED ////
+// /**
+//  * Converts keys of objects within an array from snake_case to camelCase, specifically targeting the 'contact_number' field.
+//  *
+//  * @param data An array of objects where each object's keys represent data fields.
+//  * @returns A new array derived from the input data, where each object's 'contact_number' field (if present) has been renamed to 'contactNumber'.
+//  */
+//   private mapData(data: any[]): any[] {
+//     return data.map(item => {
+//       const result: { [key: string]: any } = {};
 
-      return result;
-    });
-  }
+//       for (const key in item) {
+//         // Only transform the data that we know to be snake_case to camelCase.
+//         // const newKey = key === 'contact_number' ? 'contactNumber' : key;
+//         result[key] = item[key];
+//       }
+
+//       return result;
+//     });
+//   }
 
 /**
  * Filters a list of objects based on the provided filter criteria.
@@ -104,7 +106,8 @@ export default abstract class AbstractObject {
         return matches;
       });
 
-      return this.mapData(filteredData);
+      // return this.mapData(filteredData);
+      return filteredData;
     }
     catch (error) {
       throw new Error(`${ERROR_MSG_DATA_FETCH}, error: ${error}`);
