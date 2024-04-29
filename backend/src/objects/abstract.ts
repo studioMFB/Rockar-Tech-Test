@@ -89,6 +89,7 @@ export default abstract class AbstractObject {
  */
   private async filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
     try {
+      // Prefered approach for increase readibility.
       // Filter the data
       const filteredData = dataArray.filter((data: T) => {
         let matches = false;
@@ -106,6 +107,16 @@ export default abstract class AbstractObject {
         return matches;
       });
 
+      // // Filter the data
+      // const filteredData = dataArray.filter((data: T) => {
+      // // Check if key exists and if its value is a match.
+      //   return Object.entries(filter).every(([key, value]) => {
+      //     const dataValue = (data[key as keyof T] as string)?.toLowerCase();
+      //     return key in data && dataValue === (value as string)?.toLowerCase();
+      //   });
+      // });
+      
+      // console.log("filteredData ", filteredData);
       // return this.mapData(filteredData);
       return filteredData;
     }
